@@ -15,6 +15,20 @@ public class DemoController : ControllerBase
     public DemoController(JuanKataContext context)
     {
         _context = context;
+        var e = FindEmployee(1);
+    }
+
+    [HttpGet("/{id}")]
+    public async Task<ActionResult<Employee>> FindEmployee(int id)
+    {
+        var e = await _context.Employees
+            .Include(e => e.Team)
+            .Include(e => e.Specializations)
+            .FirstOrDefaultAsync(e => e.Id == id);
+
+        return e is null
+            ? NotFound()
+            : Ok(e);
     }
 
     [HttpGet]
