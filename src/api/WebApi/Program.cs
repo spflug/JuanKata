@@ -5,7 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddDbContext<JuanKataContext>(options =>
 {
-    options.UseSqlServer("Data Source=(localdb);Initial Catalog=JuanKata;Integrated Security=True");
+    options.UseInMemoryDatabase("JuanKata");
 });
 
 builder.Services.AddControllers();
@@ -14,7 +14,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();

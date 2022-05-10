@@ -5,13 +5,13 @@ namespace DataAccess;
 
 public class JuanKataContext : DbContext
 {
-    protected JuanKataContext() : this(new DbContextOptions<JuanKataContext>())
-    {
-    }
-
     public JuanKataContext(DbContextOptions options) : base(options)
     {
     }
+
+    public DbSet<Employee> Employees { get; set; }
+    public DbSet<Team> Teams { get; set; }
+    public DbSet<Specialization> Specializations { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
